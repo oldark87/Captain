@@ -1,0 +1,28 @@
+
+package captain;
+
+/**
+ * Contains the ship object and key statistics for it.
+ * @author Matthew Henderson
+ *
+ */
+public class Ship {
+	int maxSpeed;
+	int maxHull;
+	int hp;
+	int maxShields;
+	int sp;
+	Weapon weapon;
+	
+	/**
+	 * Blank constructor creates a generic ship with a very basic weapon and stats
+	 */
+	public Ship(){
+		maxSpeed = 100;
+		maxHull = 10;
+		hp = maxHull;
+		maxShields = 5;
+		sp = maxShields;
+		weapon = new Weapon(5, "laser");
+	}
+}

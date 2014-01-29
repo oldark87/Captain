@@ -1,0 +1,61 @@
+package captain;
+
+import java.util.Random;
+
+/**
+ * Contains main function for testing.
+ * Contains game functions
+ * @author Matthew Henderson
+ *
+ */
+
+public class Game {
+	Random generator = new Random();
+
+	/**
+	 * @param attacker The ship that is firing
+	 * @param target   The target of the attack
+	 * @return int the damage done
+	 */
+	public int fire(Ship attacker, Ship target){
+		Weapon weapon = attacker.getWeapon();
+		//indicates a miss (70% accuracy)
+		if(generator.nextInt(101) < 30){
+			return 0;
+		}
+		
+		//Hit
+		else{
+			int damage = weapon.getDamage();
+			//deal damage to shields first if they still exist
+			int sp = target.getSp();
+			if(sp > 0){
+				sp -= damage;
+				if(sp < 0)
+					sp = 0;
+				target.setSp(sp);
+			}
+			
+			//damage goes to hull if no shields are up
+			else{
+				int hp = target.getHp();
+				hp -= damage;
+			}
+			return damage;
+		}
+			
+		
+		
+	}
+	
+	public static void main(String[] args) {
+		Game game = new Game();
+		Ship ship1 = new Ship();
+		Ship ship2 = new Ship();
+		System.out.println(ship2.getSp());
+		int n = game.fire(ship1, ship2);
+		System.out.println(n);
+		System.out.println(ship2.getSp());
+	}
+
+}

@@ -1,0 +1,17 @@
+package captain;
+
+/**
+ * To run the captain game for testing.
+ * @author Matthew Henderson
+ *
+ */
+
+public class Game {
+
+	public static void main(String[] args) {
+		Ship ship1 = new Ship();
+		Ship ship2 = new Ship();
+
+	}
+
+}

@@ -1,0 +1,29 @@
+package captain;
+
+import javax.swing.*;
+import javax.swing.Timer;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+
+/**
+ * JPanel class for the battlescreen
+ * @author Matthew Henderson
+ */
+public class CaptainPanel extends JPanel {
+	private final int WIDTH = 500;
+	private final int HEIGHT = 500;
+	private JButton fireButton;
+	private JButton waitButton;
+	private JButton retreatButton;
+	
+	/**
+	 * Creates the new Panel
+	 */
+	public CaptainPanel(){
+		setPreferredSize(new Dimension(WIDTH,HEIGHT));
+		fireButton = new JButton("Fire!");
+		waitButton = new JButton("Wait for opponent");
+		retreatButton = new JButton("Retreat!");
+	}
+}
