@@ -110,6 +110,33 @@ public class Ship {
 		this.weapon = weapon;
 	}
 	
+	/*
+	 * Damage the ship's current shields.
+	 * @return Shield value post damage (+ or -)
+	 */
+	public int damageShields(int damage){
+		sp -= damage;
+		int retVal = sp;
+		if(sp < 0){
+			sp = 0;
+		}
+		
+		return retVal;
+	}
+	
+	/*
+	 * Damage the ship's current hull
+	 * @return hull value post damage (+ or -)
+	 */
+	public int damageHull(int damage){
+		hp -= damage;
+		int retVal = sp;
+		if(hp < 0){
+			hp = 0;
+		}
+		
+		return retVal;
+	}
 	
 	
 }

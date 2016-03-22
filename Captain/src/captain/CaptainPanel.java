@@ -17,12 +17,17 @@ public class CaptainPanel extends JPanel {
 	private JButton waitButton;
 	private JButton retreatButton;
 	private JLabel scoreLabel;
-	private GameData gameData = new GameData();
+	Random rand;
+	private GameData gameData;
 	
 	/**
 	 * Creates the new Panel
 	 */
 	public CaptainPanel(){
+		gameData = new GameData();
+		gameData.setPlayerShip(new Ship());
+		
+		rand = new Random();
 		setPreferredSize(new Dimension(WIDTH,HEIGHT));
 		scoreLabel = new JLabel("Kills: 0");
 		fireButton = new JButton("Fire!");
@@ -46,6 +51,44 @@ public class CaptainPanel extends JPanel {
 		public FireListener(){}
 		public void actionPerformed(ActionEvent event){
 			//put what the button does here
+			
+			//Player shooting
+			if(rand.nextInt(101) > 20){
+				System.out.println(gameData.player);
+				System.out.println("Enemy hit!");
+				int damage = gameData.player.getWeapon().getDamage();
+				if(gameData.enemy.getSp() > 0){
+					damage = gameData.enemy.damageShields(damage*-1);
+				}
+				
+				if(damage < 0){
+					damage = damage * -1;
+					damage = gameData.enemy.damageHull(damage);
+					if(damage < 1){
+						System.out.println("Enemy destroyed!");
+					}
+				}
+				
+			}
+			
+			//Enemy return fire
+			if(rand.nextInt(101) > 80){
+				System.out.println("You've been hit!");
+				int damage = gameData.enemy.getWeapon().getDamage();
+				
+				if(gameData.player.getSp() > 0){
+					damage = gameData.player.damageShields(damage*-1);
+				}
+				
+				if(damage < 0){
+					damage = damage * -1;
+					damage = gameData.player.damageHull(damage);
+					if(damage < 1){
+						System.out.println("You've been destroyed!");
+					}
+				}
+				
+			}
 		}
 	}
 	
@@ -55,6 +98,7 @@ public class CaptainPanel extends JPanel {
 			//put what the button does here
 		}
 	}
+	
 	private class RetreatListener implements ActionListener{
 		public RetreatListener(){}
 		public void actionPerformed(ActionEvent event){

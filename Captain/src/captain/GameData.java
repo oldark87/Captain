@@ -7,9 +7,18 @@ package captain;
  */
 
 public class GameData {
-	private Ship player;
-	private Ship enemy;
+	protected Ship player;
+	protected Ship enemy;
 	private int kills;
+	
+	/*
+	 * Constructor for GameData
+	 */
+	public void GameData(){
+		player = new Ship();
+		enemy = new Ship();
+		kills = 0;
+	}
 	
 	public void setPlayerShip(Ship ship){
 		player = ship;
