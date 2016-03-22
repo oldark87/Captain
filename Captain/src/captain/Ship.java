@@ -23,7 +23,7 @@ public class Ship {
 		hp = maxHull;
 		maxShields = 5;
 		sp = maxShields;
-		weapon = new Weapon(5, "laser");
+		weapon = new Weapon();
 	}
 
 	/**

@@ -6,11 +6,24 @@ package captain;
  */
 public class Weapon {
 	String type;
-	int damage;
+	int damage, firerate;
 	
-	public Weapon(int dmg, String typ){
+	/*
+	 * Primary Constructor for all 3 attributes
+	 */
+	public Weapon(int dmg, int fr, String typ){
 		type = typ;
 		damage = dmg;
+		firerate = fr;		
+	}
+	
+	/*
+	 * Default empty constructor for a basic gun
+	 */
+	public Weapon(){
+		damage = 5;
+		firerate = 1;
+		type = "gun";
 	}
 	
 	/**
@@ -24,12 +37,20 @@ public class Weapon {
 		this.type = type;
 	}
 	
+	public void setFireRate(int firerate){
+		this.firerate = firerate;
+	}
+	
 	public int getDamage(){
 		return damage;
 	}
 	
 	public String getType(){
 		return type;
+	}
+	
+	public int getFireRate(){
+		return firerate;
 	}
 	
 }
