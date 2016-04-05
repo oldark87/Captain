@@ -26,6 +26,7 @@ public class CaptainPanel extends JPanel {
 	public CaptainPanel(){
 		gameData = new GameData();
 		gameData.setPlayerShip(new Ship());
+		gameData.setEnemyShip(new Ship());
 		
 		rand = new Random();
 		setPreferredSize(new Dimension(WIDTH,HEIGHT));
@@ -51,44 +52,71 @@ public class CaptainPanel extends JPanel {
 		public FireListener(){}
 		public void actionPerformed(ActionEvent event){
 			//put what the button does here
+			String message = "Your fire ";
+			String message2 = "The enemy ship opens fire on you";
 			
 			//Player shooting
-			if(rand.nextInt(101) > 20){
-				System.out.println(gameData.player);
-				System.out.println("Enemy hit!");
+			//Player hit target
+			if(rand.nextInt(101) > 50){
 				int damage = gameData.player.getWeapon().getDamage();
+				
 				if(gameData.enemy.getSp() > 0){
-					damage = gameData.enemy.damageShields(damage*-1);
+					damage = gameData.enemy.damageShields(damage);
+					message += "glances off of your enemy's shields.";
+				}
+				else{
+					damage = damage * -1;
 				}
 				
 				if(damage < 0){
 					damage = damage * -1;
 					damage = gameData.enemy.damageHull(damage);
-					if(damage < 1){
-						System.out.println("Enemy destroyed!");
+					if(damage == 0){
+						message += "slams into your opponent's hull, and their ship becomes dead in space!";
+					}
+					else{
+						message += "slams into your opponent's hull!";
 					}
 				}
 				
 			}
+			//Player missed target
+			else{
+				message += "misses the enemy!";
+			}
 			
-			//Enemy return fire
-			if(rand.nextInt(101) > 80){
-				System.out.println("You've been hit!");
+			//Enemy return fire if not ded yet
+			//Enemy hits
+			if(rand.nextInt(101) > 50 && gameData.enemy.getHp() > 0 ){
 				int damage = gameData.enemy.getWeapon().getDamage();
-				
+
 				if(gameData.player.getSp() > 0){
-					damage = gameData.player.damageShields(damage*-1);
+					damage = gameData.player.damageShields(damage);
+					message2 += " and the shot splashes onto your shields.";
 				}
 				
 				if(damage < 0){
 					damage = damage * -1;
 					damage = gameData.player.damageHull(damage);
+					message2 += " and your hull shakes from the damage.";
 					if(damage < 1){
 						System.out.println("You've been destroyed!");
 					}
 				}
 				
 			}
+			
+			//enemy misses
+			else if(gameData.enemy.getHp() > 0){
+				message2 +=  " and the shot goes wide!";
+			}
+			
+			System.out.println(message);
+			System.out.println(message2);
+			System.out.println("Player: " + gameData.player.getSp()+ "/"+ gameData.player.getHp());
+			System.out.println("Enemy: " + gameData.enemy.getSp()+ "/"+ gameData.enemy.getHp());
+			System.out.println("\n");
+			
 		}
 	}
 	

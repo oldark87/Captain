@@ -19,9 +19,9 @@ public class Ship {
 	 */
 	public Ship(){
 		maxSpeed = 100;
-		maxHull = 10;
+		maxHull = 20;
 		hp = maxHull;
-		maxShields = 5;
+		maxShields = 10;
 		sp = maxShields;
 		weapon = new Weapon();
 	}
@@ -130,7 +130,7 @@ public class Ship {
 	 */
 	public int damageHull(int damage){
 		hp -= damage;
-		int retVal = sp;
+		int retVal = hp;
 		if(hp < 0){
 			hp = 0;
 		}
